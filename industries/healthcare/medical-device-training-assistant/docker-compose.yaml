@@ -19,16 +19,16 @@ services:
       APP_PATH: 'app_chain'
       APP_VECTORSTORE_URL: "http://milvus:19530"
       APP_VECTORSTORE_NAME: "milvus"
-      APP_LLM_MODELNAME: ${APP_LLM_MODELNAME:-"meta/llama3-70b-instruct"}
+      APP_LLM_MODELNAME: ${APP_LLM_MODELNAME:-"nvdev/meta/llama3-70b-instruct"}
       APP_LLM_MODELENGINE: nvidia-ai-endpoints
       APP_LLM_SERVERURL: ${APP_LLM_SERVERURL:-""}
-      APP_EMBEDDINGS_MODELNAME: ${APP_EMBEDDINGS_MODELNAME:-nvidia/nv-embedqa-e5-v5}
+      APP_EMBEDDINGS_MODELNAME: ${APP_EMBEDDINGS_MODELNAME:-nvdev/nvidia/nv-embedqa-e5-v5}
       APP_EMBEDDINGS_MODELENGINE: ${APP_EMBEDDINGS_MODELENGINE:-nvidia-ai-endpoints}
       APP_EMBEDDINGS_SERVERURL: ${APP_EMBEDDINGS_SERVERURL:-""}
       APP_TEXTSPLITTER_MODELNAME: Snowflake/snowflake-arctic-embed-l
       APP_TEXTSPLITTER_CHUNKSIZE: 506
       APP_TEXTSPLITTER_CHUNKOVERLAP: 200
-      APP_RANKING_MODELNAME: ${APP_RANKING_MODELNAME:-"nvidia/nv-rerankqa-mistral-4b-v3"} # Leave it blank to avoid using ranking
+      APP_RANKING_MODELNAME: ${APP_RANKING_MODELNAME:-"nvdev/nvidia/nv-rerankqa-mistral-4b-v3"} # Leave it blank to avoid using ranking
       APP_RANKING_MODELENGINE: ${APP_RANKING_MODELENGINE:-nvidia-ai-endpoints}
       APP_RANKING_SERVERURL: ${APP_RANKING_SERVERURL:-""}
       NVIDIA_API_KEY: ${NVIDIA_API_KEY}
@@ -70,19 +70,19 @@ services:
     environment:
       APP_SERVERURL: http://chain-server
       APP_SERVERPORT: 8081
-      APP_MODELNAME: ${APP_LLM_MODELNAME:-"meta/llama3-70b-instruct"}
+      APP_MODELNAME: ${APP_LLM_MODELNAME:-"nvdev/meta/llama3-70b-instruct"}
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
       OTEL_EXPORTER_OTLP_PROTOCOL: grpc
       ENABLE_TRACING: false
       # if locally hosting Riva:
-      #RIVA_API_URI: <riva-ip-address>:50051
-      #TTS_SAMPLE_RATE: 48000
-      # if using Riva API Endpoint on NVIDIA API Catalog
-      RIVA_API_URI: grpc.nvcf.nvidia.com:443
-      NVIDIA_API_KEY: ${NVIDIA_API_KEY}
-      RIVA_ASR_FUNCTION_ID: 1598d209-5e27-4d3c-8079-4751568b1081
-      RIVA_TTS_FUNCTION_ID: 0149dedb-2be8-4195-b9a0-e57e0e14f972
+      RIVA_API_URI: 0.0.0.0:50051
       TTS_SAMPLE_RATE: 48000
+      # if using Riva API Endpoint on NVIDIA API Catalog
+      #RIVA_API_URI: grpc.nvcf.nvidia.com:443
+      #NVIDIA_API_KEY: ${NVIDIA_API_KEY}
+      #RIVA_ASR_FUNCTION_ID: 1598d209-5e27-4d3c-8079-4751568b1081
+      #RIVA_TTS_FUNCTION_ID: 0149dedb-2be8-4195-b9a0-e57e0e14f972
+      #TTS_SAMPLE_RATE: 48000
 
     ports:
     - "8090:8090"
